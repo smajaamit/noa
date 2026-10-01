@@ -62,10 +62,10 @@ section{min-height:100svh;position:relative;display:grid;place-items:center;padd
 const prank=document.getElementById('prank'),heroNext=document.getElementById('heroNext'),prankNext=document.getElementById('prankNext');
 const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg'),lightboxClose=document.getElementById('lightboxClose');
 document.querySelectorAll('.pic img').forEach(img=>img.addEventListener('click',()=>{lightboxImg.src=img.src;lightboxImg.alt=img.alt;lightbox.classList.add('show');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}));
-function closeLightbox(){lightbox.classList.remove('show');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+function closeLightbox(){lightbox.classList.remove('show');lightbox.setAttribute('aria-hidden','true');document.body.style.removeProperty('overflow');}
 lightboxClose.addEventListener('click',closeLightbox);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('show'))closeLightbox()});
-heroNext.addEventListener('click',()=>{prank.classList.add('show');prank.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'});
-prankNext.addEventListener('click',()=>{prank.classList.remove('show');prank.setAttribute('aria-hidden','true');document.body.classList.add('unlocked');setTimeout(()=>document.querySelector('.stats').scrollIntoView({behavior:'smooth'}),120)});
+heroNext.addEventListener('click',()=>{prank.classList.add('show');prank.setAttribute('aria-hidden','false')});
+prankNext.addEventListener('click',()=>{prank.classList.remove('show');prank.setAttribute('aria-hidden','true');document.body.classList.add('unlocked');document.body.style.removeProperty('overflow');document.documentElement.style.removeProperty('overflow');setTimeout(()=>document.querySelector('.stats').scrollIntoView({behavior:'smooth'}),120)});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
 addEventListener('scroll',()=>{const d=document.documentElement,m=d.scrollHeight-d.clientHeight;document.querySelector('.progress').style.width=(m?d.scrollTop/m*100:0)+'%'},{passive:true});
 </script></body></html>
